@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, Minus, Plus, ShoppingBag, ChevronRight, Trash2, ArrowRight } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight, Sparkles } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface CartDrawerProps {
@@ -28,7 +28,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="px-8 py-6 flex items-center justify-between border-b border-gray-100">
-            <h2 className="text-xl font-bold tracking-tight">Bag</h2>
+            <h2 className="text-xl font-bold tracking-tight">Your Bag</h2>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <X className="w-5 h-5 text-gray-500" />
             </button>
@@ -37,21 +37,32 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
           {/* Content */}
           <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8">
             {items.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-center px-4 animate-in fade-in zoom-in-95 duration-500">
-                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
-                  <ShoppingBag className="w-10 h-10 text-gray-300" />
+              <div className="h-full flex flex-col items-center justify-center text-center px-6 animate-in fade-in zoom-in-95 duration-700">
+                <div className="relative mb-10">
+                  <div className="w-28 h-28 bg-gray-50 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                    <ShoppingBag className="w-12 h-12 text-gray-200" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-blue-500 text-white p-2 rounded-full shadow-lg animate-bounce">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Your bag is empty.</h3>
-                <p className="text-sm text-gray-500 mb-10 leading-relaxed max-w-[240px] mx-auto">
-                  Your journey to the next frontier of communication starts with your first Model π.
+                
+                <h3 className="text-3xl font-bold text-gray-900 mb-4 tracking-tight italic">The future is waiting.</h3>
+                <p className="text-base text-gray-500 mb-12 leading-relaxed font-medium">
+                  Your reservation slot for the first 100,000 Model π units is still open. Start configuring your handheld of the future today.
                 </p>
+                
                 <button 
                   onClick={onClose} 
-                  className="group flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-gray-800 transition-all active:scale-95 shadow-xl shadow-black/10"
+                  className="group w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:bg-gray-800 transition-all active:scale-95 shadow-2xl shadow-black/20"
                 >
                   Start Shopping
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
+                
+                <p className="mt-8 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                  Priority Shipping for Early Reservations
+                </p>
               </div>
             ) : (
               items.map((item) => (
@@ -92,18 +103,18 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                 </div>
                 <div className="flex justify-between text-xs font-medium text-gray-500">
                   <span>Shipping</span>
-                  <span className="text-green-600">FREE</span>
+                  <span className="text-green-600 font-bold">FREE</span>
                 </div>
-                <div className="flex justify-between items-end pt-2">
+                <div className="flex justify-between items-end pt-2 border-t border-gray-200 mt-2">
                   <span className="text-lg font-bold">Total</span>
-                  <span className="text-2xl font-bold">${total.toLocaleString()}</span>
+                  <span className="text-2xl font-black italic tracking-tighter">${total.toLocaleString()}</span>
                 </div>
               </div>
               <button 
                 onClick={onCheckout}
-                className="w-full bg-[#0071e3] text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/20 active:scale-[0.98] hover:bg-[#0077ed] transition-colors"
+                className="w-full bg-[#0071e3] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-500/20 active:scale-[0.98] hover:bg-[#0077ed] transition-colors"
               >
-                Review Bag & Checkout
+                Review & Checkout
               </button>
             </div>
           )}
