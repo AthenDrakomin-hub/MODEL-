@@ -10,24 +10,18 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml",
-      "headers": {
-        "Cache-Control": "public, max-age=3600"
-      }
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
     },
     {
-      "src": "/robots.txt",
-      "dest": "/robots.txt",
-      "headers": {
-        "Cache-Control": "public, max-age=86400"
-      }
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html$1"
+      "source": "/((?!sitemap.xml|robots.txt).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

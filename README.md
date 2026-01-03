@@ -74,7 +74,9 @@
 项目已支持真实的 PayPal 和 USDT 支付功能。要启用真实支付，请：
 
 1. **PayPal 配置**:
-   - 获取 PayPal 商家账户的 Client ID
+   - **账户类型要求**: 强烈建议使用 PayPal Business Account 而非 Personal Account
+   - Business Account 优势: 更高的交易限额、专业外观、增强功能、更好的合规性
+   - 获取 PayPal Business 账户的 Client ID
    - 在 Vercel 环境变量中设置 `PAYPAL_CLIENT_ID`
 
 2. **USDT 配置**:
@@ -153,7 +155,9 @@
 项目已支持真实的 PayPal 和 USDT 支付功能。要启用真实支付，请：
 
 1. **PayPal 配置**:
-   - 获取 PayPal 商家账户的 Client ID
+   - **账户类型要求**: 强烈建议使用 PayPal Business Account 而非 Personal Account
+   - Business Account 优势: 更高的交易限额、专业外观、增强功能、更好的合规性
+   - 获取 PayPal Business 账户的 Client ID
    - 在 Vercel 环境变量中设置 `PAYPAL_CLIENT_ID`
 
 2. **USDT 配置**:
