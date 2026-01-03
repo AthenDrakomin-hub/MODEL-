@@ -2,6 +2,8 @@
 import React from 'react';
 import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight, Sparkles, Orbit } from 'lucide-react';
 import { CartItem } from '../types';
+import CountdownTimer from '../components/CountdownTimer';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -29,8 +31,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
           {/* Header */}
           <div className="px-10 py-8 flex items-center justify-between border-b border-gray-100">
             <div>
-              <h2 className="text-2xl font-black tracking-tighter italic">Your Bag</h2>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1">Model π Reservation Node</p>
+              <h2 className="text-2xl font-black tracking-tighter italic">Your Reservation</h2>
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1">Model π Pre-Order System</p>
             </div>
             <button onClick={onClose} className="p-3 hover:bg-gray-100 rounded-full transition-all active:scale-90">
               <X className="w-6 h-6 text-gray-400" />
@@ -61,9 +63,14 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                 <h3 className="text-4xl font-black text-gray-900 mb-6 tracking-tighter italic leading-none">
                   Awaiting <br/>Allocation.
                 </h3>
-                <p className="text-base text-gray-500 mb-14 leading-relaxed font-medium px-4">
+                <p className="text-base text-gray-500 mb-6 leading-relaxed font-medium px-4">
                   The first 100,000 units are moving fast. Secure your position in the satellite communication revolution.
                 </p>
+                <div className="bg-gray-50 rounded-2xl p-6 mb-10">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider text-center mb-4">Official Launch</p>
+                  <p className="text-lg font-black text-center mb-4">January 31, 2026</p>
+                  <CountdownTimer targetDate={new Date('2026-01-31T00:00:00')} />
+                </div>
                 
                 <button 
                   onClick={onClose} 
@@ -87,7 +94,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                 {items.map((item) => (
                   <div key={item.id} className="flex gap-8 animate-in fade-in slide-in-from-right-8 duration-500">
                     <div className="w-28 h-28 bg-gray-50 rounded-[2rem] p-4 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm">
-                      <img src={item.imageUrl} alt={item.model} className="h-full w-full object-contain" />
+                      <ImageWithFallback 
+                        src={item.imageUrl} 
+                        alt={item.model} 
+                        className="h-full w-full object-contain" 
+                        loading="lazy"
+                      />
                     </div>
                     <div className="flex-1 py-1">
                       <div className="flex justify-between items-start mb-1">
@@ -126,20 +138,42 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                   <span className="text-blue-600">Complimentary</span>
                 </div>
                 <div className="flex justify-between items-end pt-6 border-t border-gray-100 mt-4">
-                  <span className="text-xl font-bold">Estimated Total</span>
+                  <span className="text-xl font-bold">Reservation Total</span>
                   <span className="text-4xl font-black italic tracking-tighter leading-none">${total.toLocaleString()}</span>
+                </div>
+                <div className="pt-4 mt-4 border-t border-gray-100">
+                  <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-gray-400">
+                    <span>30% Deposit Due Now</span>
+                    <span className="text-blue-600">${(total * 0.3).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  </div>
+                  <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-gray-400">
+                    <span>70% Final Payment (Jan 31, 2026)</span>
+                    <span className="text-gray-900">${(total * 0.7).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  </div>
                 </div>
               </div>
               <button 
                 onClick={onCheckout}
                 className="w-full bg-black text-white py-6 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl active:scale-[0.98] hover:bg-gray-900 transition-all flex items-center justify-center gap-3"
               >
-                Proceed to Secure Checkout
+                Continue to Delivery Info
                 <ArrowRight className="w-5 h-5" />
               </button>
-              <div className="mt-6 flex items-center justify-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
+              <div className="mt-4 flex items-center justify-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                 Encryption Protocol Active
+              </div>
+              <div className="mt-4 text-center">
+                <p className="text-[8px] text-gray-400">
+                  By continuing, you agree to our{' '}
+                  <button className="text-blue-600 hover:underline" onClick={() => {/* This would need to be passed from parent */}}>
+                    Terms
+                  </button>
+                  {' '}and{' '}
+                  <button className="text-blue-600 hover:underline" onClick={() => {/* This would need to be passed from parent */}}>
+                    Privacy Policy
+                  </button>
+                </p>
               </div>
             </div>
           )}

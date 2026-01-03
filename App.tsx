@@ -6,6 +6,14 @@ import { Product, CartItem } from './types';
 import PreOrderPortal from './components/PreOrderPortal';
 import CartDrawer from './components/CartDrawer';
 import AllocationOverview from './components/AllocationOverview';
+import CountdownTimer from './components/CountdownTimer';
+import LegalDocuments from './components/LegalDocuments';
+import ComplianceSection from './components/ComplianceSection';
+import ImageWithFallback from './components/ImageWithFallback';
+import ImagePreloader from './components/ImagePreloader';
+import SEO from './components/SEO';
+import StructuredData from './components/StructuredData';
+import ResourcePreloader from './components/ResourcePreloader';
 
 const App: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>(INITIAL_PRODUCTS[0]);
@@ -14,6 +22,14 @@ const App: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [liveCount, setLiveCount] = useState(100000);
+  const [showLegalPage, setShowLegalPage] = useState(false);
+  
+  // 图片预加载
+  const allImageUrls = [
+    'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye1.jpg',
+    'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye2.jpg',
+    ...INITIAL_PRODUCTS.map(product => product.imageUrl)
+  ];
 
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
@@ -57,6 +73,27 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100">
+      <ResourcePreloader />
+      <SEO 
+        title="Tesla Model π - Revolutionary Smart Phone with Starlink Integration | Pre-order Now"
+        description="Experience the future with Tesla Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit."
+        keywords="Tesla, Model π, smart phone, Starlink, satellite phone, solar charging, revolutionary technology, AI phone, 5G smartphone"
+        url="https://model-pi.xyz/"
+        image="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye1.jpg"
+      />
+      <StructuredData 
+        products={INITIAL_PRODUCTS}
+        selectedProduct={selectedProduct}
+      />
+      
+      {/* Loading indicator for better UX */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white" id="loading-screen" style={{ display: 'none' }}>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-gray-600">Loading Model π...</p>
+        </div>
+      </div>
+      
       {/* 生产模式顶部库存条 */}
       <div className="bg-black py-3 text-center sticky top-0 z-[70] border-b border-white/5">
         <div className="flex justify-center items-center gap-6 px-4">
@@ -96,11 +133,46 @@ const App: React.FC = () => {
         </div>
       </nav>
 
+      {/* 预售倒计时 */}
+      <div className={`fixed top-32 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm py-4' : 'bg-black/80 text-white py-3'}`}>
+        <div className="max-w-[1400px] mx-auto px-10">
+          <div className="text-center">
+            <p className={`font-bold ${scrolled ? 'text-gray-700' : 'text-white'}`}>PRE-ORDER PHASE - PAY 30% NOW, 70% AT LAUNCH</p>
+            <div className="mt-2">
+              <p className={`text-sm ${scrolled ? 'text-gray-500' : 'text-gray-300'}`}>Official Launch: January 31, 2026</p>
+              <CountdownTimer targetDate={new Date('2026-01-31T00:00:00')} />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* 图片预加载 */}
+      <ImagePreloader imageUrls={allImageUrls} />
+      
+      {/* 法律合规信息链接 */}
+      <div className={`fixed top-64 left-0 right-0 z-30 transition-all duration-700 ${scrolled ? 'bg-blue-50/90 backdrop-blur-sm py-2' : 'bg-blue-900/80 text-white py-1'}`}>
+        <div className="max-w-[1400px] mx-auto px-10">
+          <div className="text-center">
+            <p className={`text-xs ${scrolled ? 'text-blue-700' : 'text-blue-200'}`}>
+              <button 
+                onClick={() => setShowLegalPage(true)}
+                className={`hover:underline ${scrolled ? 'text-blue-700' : 'text-blue-200'}`}
+              >
+                Compliance Certificates, Privacy Policy, Terms of Service
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Hero 区域 */}
       <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-black text-white">
          <div className="z-10 animate-fade-up px-6 space-y-8 mt-12">
-            <h1 className="text-[12vw] md:text-[180px] font-bold tracking-tighter italic leading-none select-none drop-shadow-2xl">Model π</h1>
+            <h1 className="text-[12vw] md:text-[180px] font-bold tracking-tighter italic leading-none select-none drop-shadow-2xl">Tesla Model π</h1>
             <p className="text-xl md:text-3xl font-light text-gray-400 tracking-[0.6em] uppercase">Interplanetary Standard</p>
+            <p className="text-lg md:text-xl text-gray-500 tracking-wide mt-4 max-w-2xl mx-auto">
+              Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging
+            </p>
             <div className="pt-16 flex flex-col sm:flex-row gap-6 justify-center">
                <button onClick={() => scrollTo(buyRef)} className="w-64 bg-white text-black px-12 py-5 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-2xl active:scale-95">Pre-order Now</button>
                <button onClick={() => scrollTo(videoRef)} className="w-64 border border-white/20 backdrop-blur-md text-white px-12 py-5 rounded-full font-bold text-sm hover:bg-white/10 transition-all active:scale-95">Watch Film</button>
@@ -116,22 +188,26 @@ const App: React.FC = () => {
       <section ref={videoRef} className="bg-black py-48 px-6">
         <div className="max-w-[1200px] mx-auto text-center space-y-24">
           <div className="space-y-6">
-            <h2 className="text-7xl font-bold text-white tracking-tighter italic">Official Reveal.</h2>
+            <h2 className="text-7xl font-bold text-white tracking-tighter italic">Official Tesla Model π Reveal</h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-xl font-medium leading-relaxed italic">
-              "Engineering the next frontier."
+              "Engineering the next frontier of mobile communication."
+            </p>
+            <p className="text-gray-300 max-w-3xl mx-auto text-lg font-normal">
+              Discover the revolutionary features of Tesla Model π: Starlink satellite connectivity, solar charging, and AI-powered capabilities.
             </p>
           </div>
           
           <div className="relative w-full overflow-hidden rounded-[3rem] shadow-[0_0_150px_rgba(255,255,255,0.1)] border border-white/10 bg-gray-950" style={{ aspectRatio: '1184 / 752' }}>
-            <iframe 
-              src="https://www.youtube.com/embed/xe48lG4393M" 
+            <video 
+              src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/shiping/IMG_0116.MP4" 
               title="MODEL PI Π" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            ></iframe>
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 w-full h-full object-cover"
+            ></video>
           </div>
         </div>
       </section>
@@ -143,27 +219,43 @@ const App: React.FC = () => {
             <div className="w-24 h-24 bg-blue-50 rounded-[3rem] flex items-center justify-center text-blue-600 shadow-inner">
                <Globe className="w-12 h-12" />
             </div>
-            <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Starlink.</h2>
+            <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Starlink Connectivity</h2>
             <p className="text-2xl text-gray-500 leading-relaxed font-medium italic">
               Native orbital handshake. Global 1Gbps uplink anywhere on the planet.
             </p>
+            <p className="text-lg text-gray-600 mt-4">
+              Experience true global connectivity with direct Starlink satellite integration
+            </p>
           </div>
           <div className="bg-[#f5f5f7] rounded-[5rem] p-16 aspect-square shadow-2xl overflow-hidden group">
-             <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover rounded-[3rem] group-hover:scale-105 transition-transform duration-[3s]" alt="Starlink" />
+             <ImageWithFallback 
+               src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye1.jpg" 
+               className="w-full h-full object-cover rounded-[3rem] group-hover:scale-105 transition-transform duration-[3s]" 
+               alt="Starlink" 
+               loading="lazy"
+             />
           </div>
         </div>
 
         <div className="max-w-[1200px] mx-auto px-10 grid grid-cols-1 md:grid-cols-2 gap-32 items-center">
           <div className="bg-[#f5f5f7] rounded-[5rem] p-16 aspect-square shadow-2xl overflow-hidden order-2 md:order-1 group">
-             <img src="https://images.unsplash.com/photo-1509391366360-fe5bb658582f?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover rounded-[3rem] group-hover:scale-105 transition-transform duration-[3s]" alt="Solar" />
+             <ImageWithFallback 
+               src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye2.jpg" 
+               className="w-full h-full object-cover rounded-[3rem] group-hover:scale-105 transition-transform duration-[3s]" 
+               alt="Solar" 
+               loading="lazy"
+             />
           </div>
           <div className="space-y-10 order-1 md:order-2">
             <div className="w-24 h-24 bg-orange-50 rounded-[3rem] flex items-center justify-center text-orange-600 shadow-inner">
                <Zap className="w-12 h-12" />
             </div>
-            <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Solar.</h2>
+            <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Solar Charging</h2>
             <p className="text-2xl text-gray-500 leading-relaxed font-medium italic">
               Integrated photo-voltaic backplate. Autonomous charging from ambient photons.
+            </p>
+            <p className="text-lg text-gray-600 mt-4">
+              Never worry about battery life with revolutionary solar charging technology
             </p>
           </div>
         </div>
@@ -187,7 +279,8 @@ const App: React.FC = () => {
             <div className="space-y-32">
               <div className="space-y-8">
                 <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.5em]">Phase 1 Allocation</span>
-                <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Configure.</h2>
+                <h2 className="text-8xl font-black tracking-tighter leading-none italic uppercase">Configure Your Model π</h2>
+              <p className="text-xl text-gray-600">Customize your revolutionary smart phone with exclusive features</p>
               </div>
 
               <div className="space-y-20">
@@ -251,12 +344,17 @@ const App: React.FC = () => {
       <section ref={allocationRef} className="bg-[#f5f5f7] py-60 px-10">
          <div className="max-w-[1100px] mx-auto space-y-32">
             <div className="text-center space-y-8">
-               <h2 className="text-7xl font-black tracking-tighter italic uppercase">Global Logistics.</h2>
+               <h2 className="text-7xl font-black tracking-tighter italic uppercase">Global Logistics & Inventory</h2>
                <p className="text-gray-500 text-xl max-w-2xl mx-auto font-medium">Monitoring inventory flow across planetary nodes.</p>
+               <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+                  Track your Tesla Model π pre-order status and estimated delivery timeline.
+               </p>
             </div>
             <AllocationOverview />
          </div>
       </section>
+
+      <ComplianceSection />
 
       {/* 页脚 */}
       <footer className="bg-white py-48 px-12 border-t border-gray-100">
@@ -271,30 +369,65 @@ const App: React.FC = () => {
               <p className="text-black">Orders</p>
               <button onClick={() => scrollTo(buyRef)} className="block hover:text-black">Reservation</button>
               <button className="block hover:text-black">Status Hub</button>
+              <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Legal Documents</button>
+              <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Compliance Certificates</button>
             </div>
             <div className="md:col-span-2 space-y-20 normal-case text-[15px] tracking-normal font-medium text-gray-400">
               <div className="text-7xl font-bold text-black tracking-tighter italic">π</div>
-              <p className="leading-relaxed">Tesla Inc. © 2025. This platform is the official hub for Model π reservations. Final hardware specifications are subject to planetary synchronization.</p>
+              <p className="leading-relaxed">
+                Tesla Model π - Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging. 
+                Pre-order the future of mobile communication with 30% deposit. 
+                Tesla Inc. © 2025. This platform is the official hub for Model π reservations. 
+                Final hardware specifications are subject to planetary synchronization.
+              </p>
+              <div className="pt-4">
+                <h3 className="font-bold text-lg text-black mb-2">Explore Tesla Model π</h3>
+                <ul className="grid grid-cols-2 gap-2 text-sm">
+                  <li><a href="#hero" className="hover:text-blue-600">Overview</a></li>
+                  <li><a href="#video" className="hover:text-blue-600">Video</a></li>
+                  <li><a href="#specs" className="hover:text-blue-600">Features</a></li>
+                  <li><a href="#buy" className="hover:text-blue-600">Configure</a></li>
+                  <li><a href="#allocation" className="hover:text-blue-600">Availability</a></li>
+                  <li><a href="#" onClick={() => setShowLegalPage(true)} className="hover:text-blue-600">Legal</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </footer>
 
       {/* 侧边栏与弹窗 */}
-      <CartDrawer 
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cart}
-        onUpdateQuantity={(id, delta) => setCart(prev => prev.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item))}
-        onRemove={(id) => setCart(prev => prev.filter(item => item.id !== id))}
-        onCheckout={() => { setIsCartOpen(false); setIsPortalOpen(true); }}
-      />
-      {isPortalOpen && (
-        <PreOrderPortal 
-          cart={cart}
-          onClearCart={() => setCart([])}
-          onClose={() => setIsPortalOpen(false)}
-        />
+      {showLegalPage ? (
+        <div className="min-h-screen bg-white">
+          <div className="max-w-[1400px] mx-auto px-6">
+            <button 
+              onClick={() => setShowLegalPage(false)}
+              className="mt-8 mb-4 px-6 py-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+            >
+              ← Back to Store
+            </button>
+            <LegalDocuments />
+          </div>
+        </div>
+      ) : (
+        <>
+          <CartDrawer 
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            items={cart}
+            onUpdateQuantity={(id, delta) => setCart(prev => prev.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item))}
+            onRemove={(id) => setCart(prev => prev.filter(item => item.id !== id))}
+            onCheckout={() => { setIsCartOpen(false); setIsPortalOpen(true); }}
+          />
+          {isPortalOpen && (
+            <PreOrderPortal 
+              cart={cart}
+              onClearCart={() => setCart([])}
+              onClose={() => setIsPortalOpen(false)}
+              onShowLegal={() => setShowLegalPage(true)}
+            />
+          )}
+        </>
       )}
     </div>
   );

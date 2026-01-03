@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://model-pi.xyz/sitemap.xml
+
+# Prevent crawling of development/staging environments
+User-agent: *
+Disallow: /dev/
+Disallow: /test/
+Disallow: /staging/
+
+# Crawl-delay for non-aggressive crawling
+Crawl-delay: 1

@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# Allow specific user agents to access all content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://model-pi.xyz/sitemap.xml
+
+# Crawl-delay for non-aggressive crawling
+Crawl-delay: 1
+
+# Host directive
+Host: https://model-pi.xyz
+
+# Disallow private or non-essential areas
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.xls$

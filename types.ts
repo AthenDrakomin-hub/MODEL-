@@ -25,7 +25,8 @@ export interface Order {
   date: string;
   items: CartItem[];
   totalDeposit: number;
-  status: 'In Production' | 'Satellite Syncing' | 'Logistics Prep';
+  finalPaymentAmount?: number;
+  status: 'Reservation Confirmed' | 'Awaiting Final Payment' | 'In Production' | 'Satellite Syncing' | 'Logistics Prep' | 'Shipped';
 }
 
 export interface InventoryStats {
