@@ -1,15 +1,7 @@
 {
   "version": 2,
   "name": "tesla-model-pi",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+
   "rewrites": [
     {
       "source": "/sitemap.xml",
