@@ -14,7 +14,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '40%',
     description: 'Minimalist dual-lens gateway. The pure entry point into the Starlink-connected future of communication.',
     features: ['Starlink Global Access', 'Solar Energy Back', 'Simplified Core'],
-    imageUrl: 'input_file_4.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL1.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -30,7 +30,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '11%',
     description: 'The iconic Tesla speed signature. High-performance triple-lens optics for 8K satellite-uplinked broadcasting.',
     features: ['8K Satellite Streaming', 'High-Speed Processor', 'Signature Red Finish'],
-    imageUrl: 'input_file_0.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL2.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -46,7 +46,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '11%',
     description: 'Lustrous, organic emerald finish. Built with a sustainable titanium-recycled frame.',
     features: ['Bio-Sensing Core', 'Sustainable Titanium', 'Starlink 2.0 Ready'],
-    imageUrl: 'input_file_1.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL3.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -62,7 +62,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '11%',
     description: 'Deep, galactic violet tones. Optimized for low-light astrophotography.',
     features: ['Astrophotography Mode', 'Quantum Privacy Glass', 'Deep Space Signal'],
-    imageUrl: 'input_file_2.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL4.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -78,7 +78,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '11%',
     description: 'Bold, kinetic energy. Featuring high-efficiency cooling for intensive processing.',
     features: ['Advanced Thermal Logic', 'Kinetic Matte Grip', 'Neural-Link Compatible'],
-    imageUrl: 'input_file_3.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL5.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -94,7 +94,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '11%',
     description: 'Marine-grade resilience. Optimized for underwater operations.',
     features: ['IP69K Waterproof', 'Dual-Phase Cooling', 'Marine Blue Coating'],
-    imageUrl: 'input_file_5.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL6.png',
     logistics: 'Global Free Shipping',
     isLimited: false
   },
@@ -110,7 +110,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     percentage: '5%',
     description: 'The pinnacle of industrial design. Cybertruck-inspired angularity with a massive foldable liquid display.',
     features: ['Ultra-High Performance', 'Dual-Fold Design', 'Mars-Relay Access'],
-    imageUrl: 'input_file_6.png',
+    imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL%20APPI.png',
     logistics: 'Priority Air Freight',
     isLimited: true
   }
