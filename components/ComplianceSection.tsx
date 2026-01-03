@@ -25,7 +25,7 @@ const ComplianceSection: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Compliance Certifications</h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Tesla Model π meets international safety and quality standards across multiple regions and markets.
+            Model π meets international safety and quality standards across multiple regions and markets.
           </p>
         </div>
         
@@ -38,12 +38,12 @@ const ComplianceSection: React.FC = () => {
           <ComplianceBadge 
             standard="CE" 
             description="EU Safety & EMC Standards" 
-            validUntil="Jan 1, 2031" 
+            validUntil="Dec 31, 2031" 
           />
           <ComplianceBadge 
             standard="UKCA" 
             description="UK Product Safety Mark" 
-            validUntil="Jan 1, 2031" 
+            validUntil="Dec 31, 2031" 
           />
           <ComplianceBadge 
             standard="PSE" 

@@ -22,7 +22,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ products, selectedProdu
         "availability": selectedProduct.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
         "seller": {
           "@type": "Organization",
-          "name": "Tesla Model π Exclusive Store"
+          "name": "Model π Exclusive Store"
         }
       },
       "brand": {
@@ -37,7 +37,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ products, selectedProdu
     const organizationSchema = {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Tesla Model π Exclusive Store",
+      "name": "Model π Exclusive Store",
       "url": "https://model-pi.xyz",
       "logo": "https://model-pi.xyz/logo.png",
       "contactPoint": {
@@ -52,7 +52,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ products, selectedProdu
     const websiteSchema = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Tesla Model π",
+      "name": "Model π",
       "url": "https://model-pi.xyz",
       "potentialAction": {
         "@type": "SearchAction",
@@ -68,7 +68,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ products, selectedProdu
       "itemListElement": [{
         "@type": "ListItem",
         "position": 1,
-        "name": "Tesla Model π",
+        "name": "Model π",
         "item": "https://model-pi.xyz"
       }, {
         "@type": "ListItem",

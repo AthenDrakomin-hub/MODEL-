@@ -28,7 +28,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     stock: 11000,
     totalAllocation: 11000,
     percentage: '11%',
-    description: 'The iconic Tesla speed signature. High-performance triple-lens optics for 8K satellite-uplinked broadcasting.',
+    description: 'The iconic speed signature. High-performance triple-lens optics for 8K satellite-uplinked broadcasting.',
     features: ['8K Satellite Streaming', 'High-Speed Processor', 'Signature Red Finish'],
     imageUrl: 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/MODEL3.png',
     logistics: 'Global Free Shipping',

@@ -75,8 +75,8 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-white selection:bg-blue-100">
       <ResourcePreloader />
       <SEO 
-        title="Tesla Model π - Revolutionary Smart Phone with Starlink Integration | Pre-order Now"
-        description="Experience the future with Tesla Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit."
+        title="Model π - Revolutionary Smart Phone with Starlink Integration | Pre-order Now"
+        description="Experience the future with Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit."
         keywords="Tesla, Model π, smart phone, Starlink, satellite phone, solar charging, revolutionary technology, AI phone, 5G smartphone"
         url="https://model-pi.xyz/"
         image="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye1.jpg"
@@ -134,14 +134,12 @@ const App: React.FC = () => {
       </nav>
 
       {/* 预售倒计时 */}
-      <div className={`fixed top-32 left-0 right-0 z-40 transition-all duration-700 ${scrolled ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm py-4' : 'bg-black/80 text-white py-3'}`}>
-        <div className="max-w-[1400px] mx-auto px-10">
-          <div className="text-center">
-            <p className={`font-bold ${scrolled ? 'text-gray-700' : 'text-white'}`}>PRE-ORDER PHASE - PAY 30% NOW, 70% AT LAUNCH</p>
-            <div className="mt-2">
-              <p className={`text-sm ${scrolled ? 'text-gray-500' : 'text-gray-300'}`}>Official Launch: January 31, 2026</p>
-              <CountdownTimer targetDate={new Date('2026-01-31T00:00:00')} />
-            </div>
+      <div className="max-w-[1400px] mx-auto px-10 mt-24 mb-12">
+        <div className="text-center bg-gradient-to-r from-blue-50 to-indigo-50 py-8 rounded-3xl border border-blue-100">
+          <p className="font-bold text-blue-800 text-lg">PRE-ORDER PHASE - PAY 30% NOW, 70% AT LAUNCH</p>
+          <div className="mt-4">
+            <p className="text-blue-600 text-sm mb-2">Official Launch: January 31, 2026</p>
+            <CountdownTimer targetDate={new Date('2026-01-31T00:00:00')} />
           </div>
         </div>
       </div>
@@ -168,7 +166,7 @@ const App: React.FC = () => {
       {/* Hero 区域 */}
       <section ref={heroRef} className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-black text-white">
          <div className="z-10 animate-fade-up px-6 space-y-8 mt-12">
-            <h1 className="text-[12vw] md:text-[180px] font-bold tracking-tighter italic leading-none select-none drop-shadow-2xl">Tesla Model π</h1>
+            <h1 className="text-[12vw] md:text-[180px] font-bold tracking-tighter italic leading-none select-none drop-shadow-2xl">Model π</h1>
             <p className="text-xl md:text-3xl font-light text-gray-400 tracking-[0.6em] uppercase">Interplanetary Standard</p>
             <p className="text-lg md:text-xl text-gray-500 tracking-wide mt-4 max-w-2xl mx-auto">
               Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging
@@ -188,12 +186,12 @@ const App: React.FC = () => {
       <section ref={videoRef} className="bg-black py-48 px-6">
         <div className="max-w-[1200px] mx-auto text-center space-y-24">
           <div className="space-y-6">
-            <h2 className="text-7xl font-bold text-white tracking-tighter italic">Official Tesla Model π Reveal</h2>
+            <h2 className="text-7xl font-bold text-white tracking-tighter italic">Official Model π Reveal</h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-xl font-medium leading-relaxed italic">
               "Engineering the next frontier of mobile communication."
             </p>
             <p className="text-gray-300 max-w-3xl mx-auto text-lg font-normal">
-              Discover the revolutionary features of Tesla Model π: Starlink satellite connectivity, solar charging, and AI-powered capabilities.
+              Discover the revolutionary features of Model π: Starlink satellite connectivity, solar charging, and AI-powered capabilities.
             </p>
           </div>
           
@@ -347,7 +345,7 @@ const App: React.FC = () => {
                <h2 className="text-7xl font-black tracking-tighter italic uppercase">Global Logistics & Inventory</h2>
                <p className="text-gray-500 text-xl max-w-2xl mx-auto font-medium">Monitoring inventory flow across planetary nodes.</p>
                <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-                  Track your Tesla Model π pre-order status and estimated delivery timeline.
+                  Track your Model π pre-order status and estimated delivery timeline.
                </p>
             </div>
             <AllocationOverview />
@@ -375,13 +373,13 @@ const App: React.FC = () => {
             <div className="md:col-span-2 space-y-20 normal-case text-[15px] tracking-normal font-medium text-gray-400">
               <div className="text-7xl font-bold text-black tracking-tighter italic">π</div>
               <p className="leading-relaxed">
-                Tesla Model π - Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging. 
+                Model π - Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging. 
                 Pre-order the future of mobile communication with 30% deposit. 
                 Tesla Inc. © 2025. This platform is the official hub for Model π reservations. 
                 Final hardware specifications are subject to planetary synchronization.
               </p>
               <div className="pt-4">
-                <h3 className="font-bold text-lg text-black mb-2">Explore Tesla Model π</h3>
+                <h3 className="font-bold text-lg text-black mb-2">Explore Model π</h3>
                 <ul className="grid grid-cols-2 gap-2 text-sm">
                   <li><a href="#hero" className="hover:text-blue-600">Overview</a></li>
                   <li><a href="#video" className="hover:text-blue-600">Video</a></li>

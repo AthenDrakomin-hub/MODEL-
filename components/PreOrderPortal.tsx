@@ -161,7 +161,7 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
                 <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl">
                   <Truck className="w-6 h-6 text-gray-400" />
                   <div className="text-xs space-y-1">
-                    <p className="font-bold">Tesla Global Logistics</p>
+                    <p className="font-bold">Global Logistics</p>
                     <p className="text-gray-500">Inventory is reserved for 30 minutes. Order completion triggers production allocation.</p>
                   </div>
                 </div>

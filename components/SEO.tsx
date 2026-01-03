@@ -11,9 +11,9 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = 'Tesla Model π - Revolutionary Smart Phone with Starlink Integration | Pre-order Now',
-  description = 'Experience the future with Tesla Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit.',
-  keywords = 'Tesla, Model π, smart phone, Starlink, satellite phone, solar charging, revolutionary technology, AI phone, 5G smartphone',
+  title = 'Model π - Revolutionary Smart Phone with Starlink Integration | Pre-order Now',
+  description = 'Experience the future with Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit.',
+  keywords = 'Model π, smart phone, Starlink, satellite phone, solar charging, revolutionary technology, AI phone, 5G smartphone',
   url = 'https://model-pi.xyz/',
   image = 'https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/shouye1.jpg',
   type = 'website',
@@ -63,7 +63,7 @@ const SEO: React.FC<SEOProps> = ({
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
       { property: 'og:image', content: image },
-      { property: 'og:site_name', content: 'Tesla Model π' }
+      { property: 'og:site_name', content: 'Model π' }
     ];
 
     ogTags.forEach(tag => {
