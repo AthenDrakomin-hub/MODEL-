@@ -6,43 +6,43 @@ This document outlines the payment integration requirements and recommendations 
 ## PayPal Integration
 
 ### Account Type Requirements
-- **Recommended**: PayPal Business Account
-- **Acceptable**: PayPal Personal Account (for testing/low-volume)
+- **Recommended**: PayPal Personal Account
+- **Alternative**: PayPal Business Account (for high-volume/advanced features)
 - **Not Recommended**: PayPal Friends & Family (for commercial transactions)
 
-### Why Business Account is Recommended
+### Why Personal Account is Recommended
 
-1. **Transaction Limits**
-   - Business: Higher daily/monthly transaction limits
-   - Personal: Lower transaction limits that may restrict pre-order volume
+1. **Setup Simplicity**
+   - Personal: Quick and easy account creation
+   - Business: Requires additional business information and verification
 
-2. **Professional Appearance**
-   - Business: Professional branding during checkout
-   - Personal: Personal account branding
+2. **Ease of Use**
+   - Personal: Straightforward interface
+   - Personal: Suitable for basic payment processing needs
 
-3. **Enhanced Features**
-   - Detailed transaction reporting
-   - Advanced dispute resolution tools
-   - Enhanced customer service
-   - Recurring payment options (if needed for future features)
+3. **Sufficient Features**
+   - Adequate transaction processing capabilities
+   - Standard dispute resolution tools
+   - Basic transaction reporting
+   - Suitable for pre-order platform needs
 
-4. **Compliance**
-   - Better compliance tools for handling customer data
-   - Enhanced security features
-   - Better audit trails
+4. **Cost Effectiveness**
+   - No business verification requirements
+   - No additional business fees
+   - Standard transaction fees apply
 
 5. **Volume Handling**
-   - Better equipped to handle high-volume pre-orders
-   - More reliable for commercial transactions
+   - Sufficient for initial pre-order volume
+   - Can upgrade to business account if needed
 
 ### Configuration Requirements
-- `PAYPAL_CLIENT_ID`: Your PayPal Business/Personal account client ID
+- `PAYPAL_CLIENT_ID`: Your PayPal Personal/Business account client ID
 - Supported currencies: USD (primary), with capability for others
 - Integration method: PayPal JavaScript SDK
 
 ### Sandbox Testing
 - Use PayPal's sandbox environment for development
-- Create test business/personal accounts for testing
+- Create test personal/business accounts for testing
 
 ## USDT Integration
 
@@ -71,13 +71,13 @@ This document outlines the payment integration requirements and recommendations 
 ## General Recommendations
 
 ### For High-Volume Pre-orders (Recommended)
-- PayPal Business Account
+- PayPal Personal Account (sufficient for most needs)
 - Dedicated USDT receiving wallet
 - PCI-compliant credit card processor
 - Enhanced security measures
 
 ### For Testing/Low-Volume
-- PayPal Personal Account (acceptable for testing)
+- PayPal Personal Account (perfect for testing)
 - Standard USDT wallet
 - Basic payment processing setup
 
@@ -91,9 +91,9 @@ This document outlines the payment integration requirements and recommendations 
 ## Setup Checklist
 
 ### PayPal Setup
-- [ ] Create PayPal Business Account
-- [ ] Obtain Client ID and Secret
-- [ ] Configure Webhook endpoints
+- [ ] Create PayPal Personal Account
+- [ ] Obtain Client ID
+- [ ] Configure payment processing
 - [ ] Test with sandbox environment
 - [ ] Verify compliance requirements
 - [ ] Set up transaction monitoring
@@ -115,23 +115,24 @@ This document outlines the payment integration requirements and recommendations 
 
 ## Compliance Considerations
 
+### For Personal Accounts
+- Basic compliance features
+- Standard transaction reporting
+- Suitable for smaller transaction volumes
+- May require upgrade for higher volumes
+
 ### For Business Accounts
 - Enhanced compliance features
 - Better audit capabilities
 - Professional transaction reporting
 - Improved customer dispute handling
-
-### For Personal Accounts
-- Limited compliance tools
-- Basic transaction reporting
-- May not meet all commercial requirements
-- Possible restrictions on transaction volumes
+- Higher transaction limits
 
 ## Conclusion
 
-For the Tesla Model π pre-order platform, using Business accounts (especially PayPal Business Account) is strongly recommended to ensure:
-- Higher transaction limits to handle expected volume
-- Professional appearance for customers
-- Enhanced security and compliance features
-- Better transaction reporting and analytics
-- Improved customer service capabilities
+For the Tesla Model π pre-order platform, using a PayPal Personal Account is recommended to ensure:
+- Quick and easy setup
+- Simple account management
+- Sufficient transaction capabilities for initial launch
+- Cost-effective payment processing
+- Easy upgrade path to business account if needed

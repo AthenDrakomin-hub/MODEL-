@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { X, Lock, CheckCircle2, CreditCard, ShoppingBag, Truck, Coins, ArrowLeft } from 'lucide-react';
 import { CartItem } from '../types';
 import CheckoutForm from './CheckoutForm';
+import ImageWithFallback from './ImageWithFallback';
 
 interface PreOrderPortalProps {
   cart: CartItem[];
@@ -28,7 +29,7 @@ interface FormData {
   specialInstructions?: string;
 }
 
-const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onClose }) => {
+const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onClose, onShowLegal }) => {
   const [step, setStep] = useState<CheckoutStep>('review');
   const [orderId, setOrderId] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
@@ -36,8 +37,8 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
   const [formData, setFormData] = useState<FormData | null>(null);
 
   // 使用Vercel环境变量进行真实支付配置
-  const PAYPAL_CLIENT_ID = process.env.VITE_PAYPAL_CLIENT_ID || process.env.PAYPAL_CLIENT_ID || 'CONFIG_REQUIRED';
-  const USDT_WALLET_ADDR = process.env.VITE_USDT_WALLET_ADDR || process.env.USDT_WALLET_ADDR || 'ADDRESS_NOT_SET';
+  const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || import.meta.env.PAYPAL_CLIENT_ID || 'CONFIG_REQUIRED';
+  const USDT_WALLET_ADDR = import.meta.env.VITE_USDT_WALLET_ADDR || import.meta.env.USDT_WALLET_ADDR || 'ADDRESS_NOT_SET';
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   // 预售模式：定金为商品价格的30%
