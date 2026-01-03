@@ -1,18 +1,16 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ShoppingBag, Globe, Zap, ArrowDown, Menu, Radio, MessageCircle, ChevronRight, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, Globe, Zap, Menu, MessageCircle } from 'lucide-react';
 import { INITIAL_PRODUCTS } from './constants';
 import { Product, CartItem } from './types';
 import PreOrderPortal from './components/PreOrderPortal';
 import CartDrawer from './components/CartDrawer';
 import AllocationOverview from './components/AllocationOverview';
-import LiveSupport from './components/LiveSupport';
 
 const App: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>(INITIAL_PRODUCTS[0]);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isSupportOpen, setIsSupportOpen] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [scrolled, setScrolled] = useState(false);
   const [liveCount, setLiveCount] = useState(100000);
@@ -114,7 +112,7 @@ const App: React.FC = () => {
          </div>
       </section>
 
-      {/* 彻底修复的视频区域 - 严格按照用户提供的参数 */}
+      {/* 视频区域 */}
       <section ref={videoRef} className="bg-black py-48 px-6">
         <div className="max-w-[1200px] mx-auto text-center space-y-24">
           <div className="space-y-6">
@@ -125,7 +123,6 @@ const App: React.FC = () => {
           </div>
           
           <div className="relative w-full overflow-hidden rounded-[3rem] shadow-[0_0_150px_rgba(255,255,255,0.1)] border border-white/10 bg-gray-950" style={{ aspectRatio: '1184 / 752' }}>
-            {/* 严格采用用户提供的 Iframe 核心属性，确保 Error 153 不再出现 */}
             <iframe 
               src="https://www.youtube.com/embed/xe48lG4393M" 
               title="MODEL PI Π" 
@@ -283,14 +280,6 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* 在线客服触发按钮 */}
-      <button 
-        onClick={() => setIsSupportOpen(true)}
-        className="fixed bottom-8 right-8 w-16 h-16 bg-[#0071e3] text-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-500/30 hover:scale-110 transition-all z-[60] active:scale-95"
-      >
-        <MessageCircle className="w-7 h-7" />
-      </button>
-
       {/* 侧边栏与弹窗 */}
       <CartDrawer 
         isOpen={isCartOpen}
@@ -306,9 +295,6 @@ const App: React.FC = () => {
           onClearCart={() => setCart([])}
           onClose={() => setIsPortalOpen(false)}
         />
-      )}
-      {isSupportOpen && (
-        <LiveSupport onClose={() => setIsSupportOpen(false)} />
       )}
     </div>
   );

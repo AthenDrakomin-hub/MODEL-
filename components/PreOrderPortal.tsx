@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { X, ChevronRight, Lock, CheckCircle2, CreditCard, ShoppingBag, Truck } from 'lucide-react';
+import { X, ChevronRight, Lock, CheckCircle2, CreditCard, ShoppingBag, Truck, Coins, ArrowLeft } from 'lucide-react';
 import { CartItem, Order } from '../types';
 
 interface PreOrderPortalProps {
@@ -10,10 +10,14 @@ interface PreOrderPortalProps {
 }
 
 type CheckoutStep = 'review' | 'payment' | 'done';
+type PaymentMethod = 'card' | 'paypal' | 'usdt' | null;
+type CryptoNetwork = 'ERC20' | 'TRC20' | null;
 
 const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onClose }) => {
   const [step, setStep] = useState<CheckoutStep>('review');
   const [orderId, setOrderId] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
+  const [cryptoNetwork, setCryptoNetwork] = useState<CryptoNetwork>(null);
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   const deposit = cart.reduce((sum, item) => sum + item.deposit, 0);
@@ -30,7 +34,14 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
       {/* Header */}
       <header className="h-14 border-b border-gray-200 flex items-center justify-center sticky top-0 bg-white z-10 px-6">
         <div className="max-w-[1000px] w-full flex items-center justify-between">
-          <span className="text-xl font-bold">Checkout</span>
+          <div className="flex items-center gap-4">
+            {step === 'payment' && (
+               <button onClick={() => setStep('review')} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                 <ArrowLeft className="w-4 h-4" />
+               </button>
+            )}
+            <span className="text-xl font-bold">Checkout</span>
+          </div>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-500" />
           </button>
@@ -40,7 +51,7 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
       <main className="flex-1 max-w-[1000px] mx-auto w-full px-6 py-12">
         {step === 'review' && (
           <div className="space-y-12 animate-in slide-in-from-bottom-4">
-            <h2 className="text-4xl font-bold">Review your bag.</h2>
+            <h2 className="text-4xl font-bold tracking-tight">Review your bag.</h2>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               <div className="lg:col-span-8 space-y-8">
                 {cart.map(item => (
@@ -83,7 +94,7 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
                 </div>
                 <button 
                   onClick={() => setStep('payment')}
-                  className="w-full apple-button py-4 rounded-xl font-bold text-sm shadow-md"
+                  className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm shadow-xl hover:bg-gray-800 transition-all active:scale-95"
                 >
                   Check Out
                 </button>
@@ -93,22 +104,69 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
         )}
 
         {step === 'payment' && (
-          <div className="max-w-md mx-auto space-y-12 animate-in slide-in-from-right-4">
+          <div className="max-w-md mx-auto space-y-10 animate-in slide-in-from-right-4">
              <div className="text-center space-y-4">
-               <h2 className="text-4xl font-bold">How would you like to pay?</h2>
-               <p className="text-gray-500 text-sm">Secure payment for reservation deposit.</p>
+               <h2 className="text-4xl font-bold tracking-tight">Payment Method</h2>
+               <p className="text-gray-500 text-sm">Select your preferred secure payment for the reservation deposit.</p>
              </div>
 
              <div className="space-y-4">
-               <button className="w-full p-8 apple-card rounded-2xl border-2 border-blue-500 bg-blue-50/20 text-left flex justify-between items-center">
+               {/* Credit Card */}
+               <button 
+                 onClick={() => setPaymentMethod('card')}
+                 className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'card' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100 hover:border-gray-300'}`}
+               >
                  <div className="flex items-center gap-4">
-                   <CreditCard className="w-6 h-6 text-blue-600" />
-                   <span className="font-bold">Credit Card / PayPal</span>
+                   <CreditCard className="w-6 h-6 text-gray-600" />
+                   <span className="font-bold">Credit Card</span>
                  </div>
-                 <CheckCircle2 className="text-blue-600 w-5 h-5" />
+                 {paymentMethod === 'card' && <CheckCircle2 className="text-blue-600 w-5 h-5" />}
                </button>
 
-               <button className="w-full p-8 apple-card rounded-2xl border-2 border-transparent text-left opacity-40 grayscale pointer-events-none">
+               {/* PayPal */}
+               <button 
+                 onClick={() => setPaymentMethod('paypal')}
+                 className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'paypal' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100 hover:border-gray-300'}`}
+               >
+                 <div className="flex items-center gap-4">
+                   <i className="fa-brands fa-paypal text-xl text-[#003087]"></i>
+                   <span className="font-bold">PayPal</span>
+                 </div>
+                 {paymentMethod === 'paypal' && <CheckCircle2 className="text-blue-600 w-5 h-5" />}
+               </button>
+
+               {/* USDT Crypto */}
+               <div className="space-y-3">
+                 <button 
+                   onClick={() => setPaymentMethod('usdt')}
+                   className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'usdt' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100 hover:border-gray-300'}`}
+                 >
+                   <div className="flex items-center gap-4">
+                     <Coins className="w-6 h-6 text-green-600" />
+                     <span className="font-bold">USDT (Tether)</span>
+                   </div>
+                   {paymentMethod === 'usdt' && <CheckCircle2 className="text-blue-600 w-5 h-5" />}
+                 </button>
+
+                 {paymentMethod === 'usdt' && (
+                    <div className="grid grid-cols-2 gap-3 p-2 bg-gray-50 rounded-2xl animate-in slide-in-from-top-2">
+                       <button 
+                         onClick={() => setCryptoNetwork('ERC20')}
+                         className={`py-3 rounded-xl text-xs font-bold transition-all ${cryptoNetwork === 'ERC20' ? 'bg-white shadow-sm ring-1 ring-gray-200 text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                       >
+                         ERC20 (Ethereum)
+                       </button>
+                       <button 
+                         onClick={() => setCryptoNetwork('TRC20')}
+                         className={`py-3 rounded-xl text-xs font-bold transition-all ${cryptoNetwork === 'TRC20' ? 'bg-white shadow-sm ring-1 ring-gray-200 text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                       >
+                         TRC20 (Tron)
+                       </button>
+                    </div>
+                 )}
+               </div>
+
+               <button className="w-full p-6 rounded-2xl border-2 border-transparent text-left opacity-30 grayscale pointer-events-none">
                  <div className="flex items-center gap-4">
                    <ShoppingBag className="w-6 h-6" />
                    <span className="font-bold text-gray-400">Tesla Pay (Coming Soon)</span>
@@ -119,12 +177,13 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
              <div className="pt-8 border-t border-gray-100">
                <button 
                 onClick={handleFinalize}
-                className="w-full apple-button py-4 rounded-xl font-bold text-sm"
+                disabled={!paymentMethod || (paymentMethod === 'usdt' && !cryptoNetwork)}
+                className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm shadow-xl hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all active:scale-95"
                >
                  Confirm and Pay Deposit
                </button>
                <p className="text-center text-[10px] text-gray-400 mt-6 flex items-center justify-center gap-2">
-                 <Lock className="w-3 h-3" /> Encrypted and Secure
+                 <Lock className="w-3 h-3" /> Securely handled by Tesla Global Nodes
                </p>
              </div>
           </div>
@@ -136,21 +195,27 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
               <CheckCircle2 className="w-10 h-10" />
             </div>
             <div className="space-y-4">
-              <h2 className="text-5xl font-bold tracking-tight">Thank you.</h2>
+              <h2 className="text-5xl font-bold tracking-tight italic">Thank you.</h2>
               <p className="text-gray-500 text-lg">Your reservation is confirmed.</p>
             </div>
-            <div className="apple-bg p-8 rounded-2xl text-left space-y-4">
+            <div className="apple-bg p-8 rounded-[2.5rem] text-left space-y-6">
               <div className="flex justify-between border-b border-gray-200 pb-4">
-                <span className="text-xs text-gray-500 font-bold uppercase">Order Number</span>
-                <span className="text-sm font-bold">{orderId}</span>
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">Order Number</span>
+                <span className="text-sm font-black text-black">{orderId}</span>
               </div>
-              <p className="text-xs text-gray-500 leading-relaxed">We’ve sent a confirmation email to your account. You can follow your Model π's production progress in the official Tesla app.</p>
+              <p className="text-xs text-gray-500 leading-relaxed font-medium">
+                We’ve sent a confirmation email to your account. Your Model π is now in the production queue at Giga Texas. You can monitor satellite synchronization and logistics status via the official Tesla app.
+              </p>
+              <div className="bg-white/50 p-4 rounded-xl border border-white flex items-center gap-3">
+                 <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                 <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Status: In Production Queue</span>
+              </div>
             </div>
             <button 
               onClick={onClose}
-              className="apple-button px-12 py-3 rounded-full font-bold text-sm"
+              className="bg-black text-white px-12 py-4 rounded-full font-bold text-sm hover:bg-gray-800 transition-all active:scale-95 shadow-xl"
             >
-              Continue Shopping
+              Continue Browsing
             </button>
           </div>
         )}
