@@ -127,7 +127,7 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
                  <ArrowLeft className="w-4 h-4" />
                </button>
             )}
-            <span className="text-xl font-bold tracking-tight">Tesla Checkout</span>
+            <span className="text-xl font-bold tracking-tight">Model π Checkout</span>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <X className="w-5 h-5 text-gray-500" />
