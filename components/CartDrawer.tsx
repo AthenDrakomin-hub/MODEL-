@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight, Sparkles } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight, Sparkles, Orbit } from 'lucide-react';
 import { CartItem } from '../types';
 
 interface CartDrawerProps {
@@ -19,103 +19,128 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
     <>
       {/* Backdrop */}
       <div 
-        className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-[70] transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black/40 backdrop-blur-md z-[70] transition-opacity duration-700 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
       
       {/* Drawer */}
-      <div className={`fixed top-0 right-0 h-full w-full max-w-[400px] bg-white z-[80] shadow-2xl transform transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed top-0 right-0 h-full w-full max-w-[440px] bg-white z-[80] shadow-[0_0_100px_rgba(0,0,0,0.2)] transform transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="px-8 py-6 flex items-center justify-between border-b border-gray-100">
-            <h2 className="text-xl font-bold tracking-tight">Your Bag</h2>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X className="w-5 h-5 text-gray-500" />
+          <div className="px-10 py-8 flex items-center justify-between border-b border-gray-100">
+            <div>
+              <h2 className="text-2xl font-black tracking-tighter italic">Your Bag</h2>
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em] mt-1">Model π Reservation Node</p>
+            </div>
+            <button onClick={onClose} className="p-3 hover:bg-gray-100 rounded-full transition-all active:scale-90">
+              <X className="w-6 h-6 text-gray-400" />
             </button>
           </div>
 
           {/* Content */}
-          <div className="flex-1 overflow-y-auto px-8 py-6 space-y-8">
+          <div className="flex-1 overflow-y-auto px-10 py-8">
             {items.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-center px-6 animate-in fade-in zoom-in-95 duration-700">
-                <div className="relative mb-10">
-                  <div className="w-28 h-28 bg-gray-50 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                    <ShoppingBag className="w-12 h-12 text-gray-200" />
+              <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in zoom-in-95 duration-1000">
+                {/* Futuristic Illustration */}
+                <div className="relative mb-14">
+                  {/* Orbital Rings Animation */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-48 h-48 border border-blue-500/10 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                    <div className="absolute w-60 h-60 border border-gray-100 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                    <div className="absolute w-2 h-2 bg-blue-500 rounded-full top-0 left-1/2 -translate-x-1/2 animate-[ping_3s_ease-in-out_infinite]"></div>
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-blue-500 text-white p-2 rounded-full shadow-lg animate-bounce">
-                    <Sparkles className="w-4 h-4" />
+                  
+                  <div className="relative w-32 h-32 bg-gradient-to-br from-gray-50 to-white rounded-[2.5rem] flex items-center justify-center mx-auto shadow-[inset_0_2px_10px_rgba(0,0,0,0.02),0_20px_40px_rgba(0,0,0,0.05)] border border-gray-100">
+                    <ShoppingBag className="w-14 h-14 text-gray-200 stroke-[1.5]" />
+                    <div className="absolute -bottom-2 -right-2 bg-black text-white p-2.5 rounded-2xl shadow-xl ring-4 ring-white">
+                      <Orbit className="w-5 h-5 animate-pulse" />
+                    </div>
                   </div>
                 </div>
                 
-                <h3 className="text-3xl font-bold text-gray-900 mb-4 tracking-tight italic">The future is waiting.</h3>
-                <p className="text-base text-gray-500 mb-12 leading-relaxed font-medium">
-                  Your reservation slot for the first 100,000 Model π units is still open. Start configuring your handheld of the future today.
+                <h3 className="text-4xl font-black text-gray-900 mb-6 tracking-tighter italic leading-none">
+                  Awaiting <br/>Allocation.
+                </h3>
+                <p className="text-base text-gray-500 mb-14 leading-relaxed font-medium px-4">
+                  The first 100,000 units are moving fast. Secure your position in the satellite communication revolution.
                 </p>
                 
                 <button 
                   onClick={onClose} 
-                  className="group w-full flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:bg-gray-800 transition-all active:scale-95 shadow-2xl shadow-black/20"
+                  className="group w-full relative overflow-hidden bg-black text-white px-10 py-6 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] transition-all active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
                 >
-                  Start Shopping
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <span className="relative z-10 flex items-center justify-center gap-3">
+                    View Model Lineup
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-500" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
                 </button>
                 
-                <p className="mt-8 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                  Priority Shipping for Early Reservations
-                </p>
+                <div className="mt-12 flex items-center justify-center gap-3 text-[10px] text-gray-300 font-bold uppercase tracking-[0.4em]">
+                  <div className="w-12 h-px bg-gray-100"></div>
+                  <span>Starlink Connected</span>
+                  <div className="w-12 h-px bg-gray-100"></div>
+                </div>
               </div>
             ) : (
-              items.map((item) => (
-                <div key={item.id} className="flex gap-6 animate-in fade-in slide-in-from-right-4">
-                  <div className="w-24 h-24 bg-gray-50 rounded-xl p-2 flex items-center justify-center shrink-0">
-                    <img src={item.imageUrl} alt={item.model} className="h-full object-contain" />
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-sm font-bold leading-tight">{item.model}</h4>
-                      <p className="text-sm font-bold text-gray-900">${item.price}</p>
+              <div className="space-y-10">
+                {items.map((item) => (
+                  <div key={item.id} className="flex gap-8 animate-in fade-in slide-in-from-right-8 duration-500">
+                    <div className="w-28 h-28 bg-gray-50 rounded-[2rem] p-4 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm">
+                      <img src={item.imageUrl} alt={item.model} className="h-full w-full object-contain" />
                     </div>
-                    <p className="text-[11px] text-gray-500 font-medium">{item.color}</p>
-                    
-                    <div className="flex items-center justify-between pt-3">
-                      <div className="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
-                        <button onClick={() => onUpdateQuantity(item.id, -1)} className="text-gray-400 hover:text-black"><Minus className="w-3 h-3" /></button>
-                        <span className="text-xs font-semibold w-4 text-center">{item.quantity}</span>
-                        <button onClick={() => onUpdateQuantity(item.id, 1)} className="text-gray-400 hover:text-black"><Plus className="w-3 h-3" /></button>
+                    <div className="flex-1 py-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="text-lg font-black tracking-tight">{item.model}</h4>
+                        <p className="text-lg font-black text-gray-900">${item.price}</p>
                       </div>
-                      <button onClick={() => onRemove(item.id)} className="text-gray-300 hover:text-red-500 transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <p className="text-[11px] text-gray-400 font-black uppercase tracking-widest mb-4">{item.color}</p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-100">
+                          <button onClick={() => onUpdateQuantity(item.id, -1)} className="text-gray-400 hover:text-black transition-colors"><Minus className="w-4 h-4" /></button>
+                          <span className="text-sm font-bold w-6 text-center">{item.quantity}</span>
+                          <button onClick={() => onUpdateQuantity(item.id, 1)} className="text-gray-400 hover:text-black transition-colors"><Plus className="w-4 h-4" /></button>
+                        </div>
+                        <button onClick={() => onRemove(item.id)} className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all">
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))}
+              </div>
             )}
           </div>
 
           {/* Footer */}
           {items.length > 0 && (
-            <div className="px-8 py-10 border-t border-gray-100 bg-gray-50/50">
-              <div className="space-y-3 mb-8">
-                <div className="flex justify-between text-xs font-medium text-gray-500">
+            <div className="px-10 py-12 border-t border-gray-100 bg-white shadow-[0_-20px_40px_rgba(0,0,0,0.02)]">
+              <div className="space-y-4 mb-10">
+                <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-gray-400">
                   <span>Subtotal</span>
-                  <span>${total.toLocaleString()}</span>
+                  <span className="text-gray-900">${total.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between text-xs font-medium text-gray-500">
-                  <span>Shipping</span>
-                  <span className="text-green-600 font-bold">FREE</span>
+                <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-gray-400">
+                  <span>Global Logistics</span>
+                  <span className="text-blue-600">Complimentary</span>
                 </div>
-                <div className="flex justify-between items-end pt-2 border-t border-gray-200 mt-2">
-                  <span className="text-lg font-bold">Total</span>
-                  <span className="text-2xl font-black italic tracking-tighter">${total.toLocaleString()}</span>
+                <div className="flex justify-between items-end pt-6 border-t border-gray-100 mt-4">
+                  <span className="text-xl font-bold">Estimated Total</span>
+                  <span className="text-4xl font-black italic tracking-tighter leading-none">${total.toLocaleString()}</span>
                 </div>
               </div>
               <button 
                 onClick={onCheckout}
-                className="w-full bg-[#0071e3] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-500/20 active:scale-[0.98] hover:bg-[#0077ed] transition-colors"
+                className="w-full bg-black text-white py-6 rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl active:scale-[0.98] hover:bg-gray-900 transition-all flex items-center justify-center gap-3"
               >
-                Review & Checkout
+                Proceed to Secure Checkout
+                <ArrowRight className="w-5 h-5" />
               </button>
+              <div className="mt-6 flex items-center justify-center gap-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                Encryption Protocol Active
+              </div>
             </div>
           )}
         </div>
