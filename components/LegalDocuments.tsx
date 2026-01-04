@@ -245,15 +245,6 @@ const LegalDocuments: React.FC = () => {
           </p>
         </div>
       </section>
-
-      <div className="text-center pt-12 border-t border-gray-200">
-        <p className="text-gray-500 text-sm">
-          For questions about these legal documents, contact us at: model-pi@protonmail.com
-        </p>
-        <p className="text-gray-500 text-sm mt-2">
-          Contact Address: Model π Exclusive Store, 1234 Silicon Valley Parkway, San Francisco, California 94103, USA
-        </p>
-      </div>
     </div>
   );
 };

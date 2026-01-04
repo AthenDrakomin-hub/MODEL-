@@ -66,13 +66,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                 <p className="text-base text-gray-500 mb-6 leading-relaxed font-medium px-4">
                   The first 100,000 units are moving fast. Secure your position in the satellite communication revolution.
                 </p>
-                <div className="bg-gray-50 rounded-2xl p-4 mb-10">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider text-center mb-2">Official Launch</p>
-                  <p className="text-lg font-black text-center mb-2">January 31, 2026</p>
-                  <div className="overflow-x-auto pb-2">
-                    <CountdownTimer targetDate={new Date('2026-01-31T00:00:00')} />
-                  </div>
-                </div>
                 
                 <button 
                   onClick={onClose} 

@@ -224,7 +224,7 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
                  className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'paypal' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100'}`}
                >
                  <div className="flex items-center gap-4">
-                   <i className="fa-brands fa-paypal text-xl text-[#003087]"></i>
+                   <div className="w-6 h-6 bg-[#003087] rounded text-white flex items-center justify-center text-xs font-bold">P</div>
                    <span className="font-bold">PayPal</span>
                  </div>
                  {paymentMethod === 'paypal' && <CheckCircle2 className="text-blue-600 w-5 h-5" />}

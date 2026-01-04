@@ -354,50 +354,49 @@ const App: React.FC = () => {
 
       <ComplianceSection />
 
-      {/* 页脚 */}
-      <footer className="bg-white py-20 sm:py-30 md:py-48 px-4 sm:px-6 lg:px-12 border-t border-gray-100">
-        <div className="max-w-[1400px] mx-auto text-center">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 md:gap-24 text-[8px] sm:text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
-            <div className="space-y-4 sm:space-y-6 md:space-y-8">
-              <p className="text-black">Model π</p>
-              <button onClick={() => scrollTo(heroRef)} className="block hover:text-black">Overview</button>
-              <button onClick={() => scrollTo(videoRef)} className="block hover:text-black">Film</button>
-            </div>
-            <div className="space-y-4 sm:space-y-6 md:space-y-8">
-              <p className="text-black">Orders</p>
-              <button onClick={() => scrollTo(buyRef)} className="block hover:text-black">Reservation</button>
-              <button className="block hover:text-black">Status Hub</button>
-              <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Legal Documents</button>
-              <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Compliance Certificates</button>
-            </div>
-            <div className="md:col-span-2 space-y-8 sm:space-y-12 md:space-y-20 normal-case text-[12px] sm:text-[15px] tracking-normal font-medium text-gray-400">
-              <div className="text-4xl sm:text-5xl md:text-7xl font-bold text-black tracking-tighter italic">π</div>
-              <p className="leading-relaxed text-xs sm:text-sm md:text-base">
-                Model π - Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging. 
-                Pre-order the future of mobile communication with 30% deposit. 
-                Model π. © 2025. This platform is the official hub for Model π reservations. 
-                Final hardware specifications are subject to planetary synchronization.
-              </p>
-              <div className="pt-2 sm:pt-4">
-                <h3 className="font-bold text-base sm:text-lg text-black mb-2">Explore Model π</h3>
-                <ul className="grid grid-cols-2 gap-2 text-xs sm:text-sm">
-                  <li><a href="#hero" className="hover:text-blue-600">Overview</a></li>
-                  <li><a href="#video" className="hover:text-blue-600">Video</a></li>
-                  <li><a href="#specs" className="hover:text-blue-600">Features</a></li>
-                  <li><a href="#buy" className="hover:text-blue-600">Configure</a></li>
-                  <li><a href="#allocation" className="hover:text-blue-600">Availability</a></li>
-                  <li><a href="#" onClick={() => setShowLegalPage(true)} className="hover:text-blue-600">Legal</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-
       {/* 页面切换 - 主页或法律页面 */}
       {!showLegalPage ? (
         <>
+          {/* 页脚 */}
+          <footer className="bg-white py-20 sm:py-30 md:py-48 px-4 sm:px-6 lg:px-12 border-t border-gray-100">
+            <div className="max-w-[1400px] mx-auto text-center">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 md:gap-24 text-[8px] sm:text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+                <div className="space-y-4 sm:space-y-6 md:space-y-8">
+                  <p className="text-black">Model π</p>
+                  <button onClick={() => scrollTo(heroRef)} className="block hover:text-black">Overview</button>
+                  <button onClick={() => scrollTo(videoRef)} className="block hover:text-black">Film</button>
+                </div>
+                <div className="space-y-4 sm:space-y-6 md:space-y-8">
+                  <p className="text-black">Orders</p>
+                  <button onClick={() => scrollTo(buyRef)} className="block hover:text-black">Reservation</button>
+                  <button className="block hover:text-black">Status Hub</button>
+                  <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Legal Documents</button>
+                  <button onClick={() => setShowLegalPage(true)} className="block hover:text-black">Compliance Certificates</button>
+                </div>
+                <div className="md:col-span-2 space-y-8 sm:space-y-12 md:space-y-20 normal-case text-[12px] sm:text-[15px] tracking-normal font-medium text-gray-400">
+                  <div className="text-4xl sm:text-5xl md:text-7xl font-bold text-black tracking-tighter italic">π</div>
+                  <p className="leading-relaxed text-xs sm:text-sm md:text-base">
+                    Model π - Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging. 
+                    Pre-order the future of mobile communication with 30% deposit. 
+                    Model π. © 2025. This platform is the official hub for Model π reservations. 
+                    Final hardware specifications are subject to planetary synchronization.
+                  </p>
+                  <div className="pt-2 sm:pt-4">
+                    <h3 className="font-bold text-base sm:text-lg text-black mb-2">Explore Model π</h3>
+                    <ul className="grid grid-cols-2 gap-2 text-xs sm:text-sm">
+                      <li><a href="#hero" className="hover:text-blue-600">Overview</a></li>
+                      <li><a href="#video" className="hover:text-blue-600">Video</a></li>
+                      <li><a href="#specs" className="hover:text-blue-600">Features</a></li>
+                      <li><a href="#buy" className="hover:text-blue-600">Configure</a></li>
+                      <li><a href="#allocation" className="hover:text-blue-600">Availability</a></li>
+                      <li><a href="#" onClick={() => setShowLegalPage(true)} className="hover:text-blue-600">Legal</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+
           {/* 购物车抽屉 */}
           <CartDrawer 
             isOpen={isCartOpen}
@@ -419,7 +418,7 @@ const App: React.FC = () => {
           )}
         </>
       ) : (
-        /* 内置法律页面 */
+        /* 内置法律页面 - 不显示页脚 */
         <div className="fixed inset-0 z-[100] bg-white overflow-y-auto">
           <div className="max-w-[1400px] mx-auto px-6 py-12">
             <div className="flex justify-between items-center mb-8">
