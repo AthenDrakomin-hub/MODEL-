@@ -1,4 +1,5 @@
 import React from 'react';
+import SocialShare from './SocialShare';
 
 const TechSpecifications: React.FC = () => {
   return (
@@ -90,13 +91,14 @@ const TechSpecifications: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-gray-50">
+      <div className="mt-16 pt-12 border-t border-gray-100">
         <div className="mb-12">
-          <h4 className="text-lg font-bold mb-6 text-center">Certification Standards</h4>
+          <h4 className="text-xl font-bold mb-8 text-center">Certification Standards</h4>
           <img 
             src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
             alt="Model π Product Compliance Certifications" 
-            className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+            className="w-full max-w-4xl mx-auto rounded-xl shadow-xl border border-gray-200"
+            style={{ objectFit: 'contain', maxHeight: '400px' }}
           />
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import SocialShare from './SocialShare';
 
 const LegalDocuments: React.FC = () => {
   return (
@@ -13,11 +14,12 @@ const LegalDocuments: React.FC = () => {
       <section id="compliance" className="scroll-mt-20">
         <h2 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-200">Product Compliance Certificates</h2>
         
-        <div className="mb-12">
+        <div className="mb-16">
           <img 
             src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
             alt="Model π Product Compliance Certifications" 
-            className="w-full max-w-3xl mx-auto rounded-lg shadow-md"
+            className="w-full max-w-5xl mx-auto rounded-xl shadow-xl border border-gray-200"
+            style={{ objectFit: 'contain', maxHeight: '500px' }}
           />
         </div>
         
@@ -253,6 +255,14 @@ const LegalDocuments: React.FC = () => {
           </p>
         </div>
       </section>
+      <div className="mt-16 pt-8 border-t border-gray-200">
+        <div className="flex justify-center">
+          <SocialShare 
+            title="Model π - Legal Documents and Compliance Information" 
+            description="Official legal documents, privacy policy, terms of service, and compliance certificates for Model π." 
+          />
+        </div>
+      </div>
     </div>
   );
 };

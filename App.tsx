@@ -14,6 +14,7 @@ import ImagePreloader from './components/ImagePreloader';
 import SEO from './components/SEO';
 import StructuredData from './components/StructuredData';
 import ResourcePreloader from './components/ResourcePreloader';
+import SocialShare from './components/SocialShare';
 
 const App: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>(INITIAL_PRODUCTS[0]);
@@ -205,6 +206,13 @@ const App: React.FC = () => {
             ></video>
           </div>
         </div>
+        
+        <div className="mt-16 flex justify-center">
+          <SocialShare 
+            title="Model π - Official Reveal Video" 
+            description="Watch the official reveal of Model π: Revolutionary Smart Phone with Starlink Satellite Connectivity & Solar Charging" 
+          />
+        </div>
       </section>
 
       {/* 技术特性展示 */}
@@ -323,12 +331,18 @@ const App: React.FC = () => {
                   <p className="text-3xl sm:text-5xl md:text-7xl font-black italic tracking-tighter">${selectedProduct.price}</p>
                   <p className="text-[8px] sm:text-[10px] text-gray-400 font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em]">Fully Refundable Deposit: ${selectedProduct.deposit}</p>
                 </div>
-                <button 
-                  onClick={handleAddToBag} 
-                  className="bg-black text-white px-12 sm:px-16 md:px-20 py-5 sm:py-6 md:py-7 rounded-full font-black text-[10px] sm:text-[11px] md:text-[12px] shadow-2xl hover:bg-gray-800 transition-all active:scale-95 uppercase tracking-[0.1em] sm:tracking-[0.2em]"
-                >
-                  Add to Bag
-                </button>
+                <div className="flex flex-col items-center">
+                  <button 
+                    onClick={handleAddToBag} 
+                    className="bg-black text-white px-12 sm:px-16 md:px-20 py-5 sm:py-6 md:py-7 rounded-full font-black text-[10px] sm:text-[11px] md:text-[12px] shadow-2xl hover:bg-gray-800 transition-all active:scale-95 uppercase tracking-[0.1em] sm:tracking-[0.2em] mb-4"
+                  >
+                    Add to Bag
+                  </button>
+                  <SocialShare 
+                    title={`Model π ${selectedProduct.model} - ${selectedProduct.color} - Revolutionary Smart Phone with Starlink Integration`} 
+                    description={`Check out the ${selectedProduct.model} in ${selectedProduct.color} with Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit.`} 
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -350,11 +364,11 @@ const App: React.FC = () => {
       </section>
 
       {/* Product Compliance Certifications */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Product Compliance & Certifications</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+      <section className="py-20 sm:py-24 md:py-32 px-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">Product Compliance & Certifications</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg">
               Model π meets international standards for safety, quality, and regulatory compliance across global markets.
             </p>
           </div>
@@ -363,7 +377,8 @@ const App: React.FC = () => {
             <img 
               src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
               alt="Model π Product Compliance Certifications - FCC, CE, UKCA, PSE, KC" 
-              className="w-full max-w-4xl rounded-lg shadow-lg"
+              className="w-full max-w-6xl rounded-xl shadow-2xl border border-gray-200"
+              style={{ objectFit: 'contain', maxHeight: '600px' }}
             />
           </div>
         </div>
@@ -406,6 +421,13 @@ const App: React.FC = () => {
                       <li><a href="#allocation" className="hover:text-blue-600">Availability</a></li>
                       <li><a href="#" onClick={() => setShowLegalPage(true)} className="hover:text-blue-600">Legal</a></li>
                     </ul>
+                  </div>
+                  
+                  <div className="pt-4 sm:pt-6 border-t border-gray-100 mt-4 sm:mt-6">
+                    <SocialShare 
+                      title="Model π - Revolutionary Smart Phone with Starlink Integration" 
+                      description="Experience the future with Model π, featuring Starlink satellite connectivity, solar charging, and revolutionary AI. Pre-order now with 30% deposit." 
+                    />
                   </div>
                 </div>
               </div>

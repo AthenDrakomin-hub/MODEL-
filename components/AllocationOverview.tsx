@@ -1,5 +1,7 @@
 
 import React from 'react';
+import SocialShare from './SocialShare';
+import { INITIAL_PRODUCTS } from '../constants';
 
 const AllocationOverview: React.FC = () => {
   return (
@@ -91,7 +93,16 @@ const AllocationOverview: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-20 pt-12 border-t border-gray-50 flex flex-wrap gap-8">
+      <div className="mt-16 pt-12 border-t border-gray-100">
+        <div className="flex justify-center mb-12">
+          <SocialShare 
+            title="Model π - Global Logistics & Inventory Status" 
+            description="Track Model π pre-order status and estimated delivery timeline. Monitoring inventory flow across planetary nodes." 
+          />
+        </div>
+      </div>
+      
+      <div className="mt-12 pt-8 border-t border-gray-50 flex flex-wrap gap-8">
         <div className="flex-1 min-w-[200px] p-8 bg-gray-50 rounded-[2rem]">
           <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Processing Power</p>
           <p className="text-3xl font-bold tracking-tight">10 TFLOPS <span className="text-xs text-blue-500">Neural</span></p>
