@@ -1,0 +1,10 @@
+# Project configuration file for Supabase functions
+
+[functions]
+  [functions.paypal-create-order]
+    verify_jwt = false
+    enabled = true
+
+  [functions.verify-usdt-payment]
+    verify_jwt = false
+    enabled = true

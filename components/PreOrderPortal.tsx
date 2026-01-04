@@ -72,30 +72,14 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
     }
 
     // 预售模式：处理30%定金的PayPal支付
-    try {
-      // 模拟PayPal SDK初始化和支付处理
-      const orderData = {
-        intent: 'capture',
-        purchase_units: [{
-          amount: {
-            value: deposit.toFixed(2),
-            currency_code: 'USD'
-          }
-        }]
-      };
-
-      // 实际项目中，这里会调用真实的PayPal API
-      console.log('Processing PayPal deposit payment for amount:', deposit);
-      
-      // 模拟支付成功
-      const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
-      setOrderId(id);
-      setStep('done');
-      onClearCart();
-    } catch (error) {
-      console.error('PayPal payment failed:', error);
-      alert('PayPal payment failed. Please try again.');
-    }
+    // 预售模式：处理30%定金的PayPal支付
+    alert('PayPal payment will be processed through secure PayPal gateway. In production, this would redirect to PayPal for authentication and payment processing.\n\nPayPal Client ID configured: ' + (PAYPAL_CLIENT_ID && PAYPAL_CLIENT_ID !== 'CONFIG_REQUIRED')); 
+    
+    // 模拟支付成功 - 在实际应用中，这将在PayPal成功回调后处理
+    const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
+    setOrderId(id);
+    setStep('done');
+    onClearCart();
   };
 
   const handleUSDTVerification = async () => {
@@ -108,13 +92,51 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
       alert('Please select a crypto network (ERC20 or TRC20).');
       return;
     }
+    
+    // 提示用户输入交易ID
+    const transactionId = prompt(`USDT payment initiated. Please send exactly ${deposit.toFixed(2)} USDT to the following address via ${cryptoNetwork} network:
 
-    // 预售模式：处理30%定金的USDT支付
-    // 在实际应用中，这里需要实现区块链监控来验证支付
-    const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
-    setOrderId(id);
-    setStep('done');
-    onClearCart();
+${USDT_WALLET_ADDR}
+
+After sending, please enter your transaction ID for verification:`);
+    
+    if (!transactionId) {
+      alert('Transaction ID is required for payment verification.');
+      return;
+    }
+    
+    try {
+      // 调用 Supabase 边缘函数验证USDT交易
+      // 注意：需要将 YOUR-PROJECT-ID 替换为您的实际 Supabase 项目 ID
+      const SUPABASE_PROJECT_URL = `https://YOUR-PROJECT-ID.supabase.co/functions/v1/verify-usdt-payment`;
+      
+      const response = await fetch(SUPABASE_PROJECT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          transactionId,
+          toAddress: USDT_WALLET_ADDR,
+          expectedAmount: deposit,
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (result.success && result.verified) {
+        alert(`Payment verified successfully! Transaction ID: ${transactionId}`);
+        const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
+        setOrderId(id);
+        setStep('done');
+        onClearCart();
+      } else {
+        alert(`Payment verification failed: ${result.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('USDT verification error:', error);
+      alert('Payment verification failed. Please try again or contact support.');
+    }
   };
 
   return (
@@ -209,17 +231,6 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
 
              <div className="space-y-4">
                <button 
-                 onClick={() => setPaymentMethod('card')}
-                 className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'card' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100'}`}
-               >
-                 <div className="flex items-center gap-4">
-                   <CreditCard className="w-6 h-6" />
-                   <span className="font-bold">Credit/Debit Card</span>
-                 </div>
-                 {paymentMethod === 'card' && <CheckCircle2 className="text-blue-600 w-5 h-5" />}
-               </button>
-
-               <button 
                  onClick={() => setPaymentMethod('paypal')}
                  className={`w-full p-6 rounded-2xl border-2 transition-all flex justify-between items-center ${paymentMethod === 'paypal' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-100'}`}
                >
@@ -252,8 +263,21 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
                          <div className="space-y-2">
                            <p className="text-[10px] font-bold text-gray-400 uppercase">Deposit Address:</p>
                            <p className="text-[11px] font-mono break-all bg-white p-3 rounded-lg border">{USDT_WALLET_ADDR}</p>
+                           <p className="text-[10px] text-gray-500">Send exactly ${deposit.toFixed(2)} USDT to this address</p>
                          </div>
                        )}
+                       <div className="pt-2 space-y-2">
+                         <p className="text-[10px] font-bold text-gray-400 uppercase">Payment Verification</p>
+                         <button 
+                           onClick={() => {
+                             // In a real application, this would trigger blockchain verification
+                             alert('Payment verification will check blockchain for transaction matching order amount and destination address. This is typically done automatically in the background in production.');
+                           }}
+                           className="w-full py-2 bg-black text-white rounded-lg text-xs font-bold"
+                         >
+                           Verify Payment
+                         </button>
+                       </div>
                     </div>
                  )}
                </div>

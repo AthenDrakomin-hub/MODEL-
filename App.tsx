@@ -68,7 +68,18 @@ const App: React.FC = () => {
   };
 
   const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (ref.current) {
+      const element = ref.current;
+      const offsetTop = element.offsetTop;
+      
+      // 使用 window.scrollTo 而不是 scrollIntoView，更可靠
+      window.scrollTo({
+        top: offsetTop - 100, // 减去导航栏高度
+        behavior: 'smooth'
+      });
+    } else {
+      console.warn('Ref is not attached to any element');
+    }
   };
 
   const getNavClassName = () => {
