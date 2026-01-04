@@ -112,21 +112,7 @@ const App: React.FC = () => {
       </div>
       
       {/* 生产模式顶部库存条 */}
-      <div className="bg-black py-3 text-center sticky top-0 z-[70] border-b border-white/[0.05]">
-        <div className="flex justify-center items-center gap-6 px-4">
-          <span className="text-[10px] font-black tracking-[0.4em] text-white uppercase flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse"></span>
-            Node Status: {liveCount.toLocaleString()} / 100,000 Units Available
-          </span>
-          <div className="hidden sm:block h-3 w-px bg-white/[0.2]"></div>
-          <button 
-            onClick={() => scrollTo(buyRef)} 
-            className="text-[10px] font-black text-blue-500 hover:text-blue-400 uppercase tracking-[0.3em] underline decoration-2 underline-offset-4 transition-colors"
-          >
-            Order Now
-          </button>
-        </div>
-      </div>
+
 
       {/* 极简导航栏 */}
       <nav className={getNavClassName()}>
@@ -363,7 +349,25 @@ const App: React.FC = () => {
          </div>
       </section>
 
-      <ComplianceSection />
+      {/* Product Compliance Certifications */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight mb-4">Product Compliance & Certifications</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Model π meets international standards for safety, quality, and regulatory compliance across global markets.
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <img 
+              src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
+              alt="Model π Product Compliance Certifications - FCC, CE, UKCA, PSE, KC" 
+              className="w-full max-w-4xl rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* 页面切换 - 主页或法律页面 */}
       {!showLegalPage ? (

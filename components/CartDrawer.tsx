@@ -64,7 +64,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, items, onUpdat
                   Awaiting <br/>Allocation.
                 </h3>
                 <p className="text-base text-gray-500 mb-6 leading-relaxed font-medium px-4">
-                  The first 100,000 units are moving fast. Secure your position in the satellite communication revolution.
+                  Secure your position in the satellite communication revolution.
                 </p>
                 
                 <button 

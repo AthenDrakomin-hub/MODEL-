@@ -13,6 +13,14 @@ const LegalDocuments: React.FC = () => {
       <section id="compliance" className="scroll-mt-20">
         <h2 className="text-3xl font-bold mb-8 pb-4 border-b border-gray-200">Product Compliance Certificates</h2>
         
+        <div className="mb-12">
+          <img 
+            src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
+            alt="Model π Product Compliance Certifications" 
+            className="w-full max-w-3xl mx-auto rounded-lg shadow-md"
+          />
+        </div>
+        
         <div className="space-y-12">
           <div className="bg-gray-50 p-8 rounded-2xl">
             <h3 className="text-xl font-bold mb-4 text-blue-600">U.S. FCC ID Certification Certificate</h3>

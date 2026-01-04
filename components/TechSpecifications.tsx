@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-const AllocationOverview: React.FC = () => {
+const TechSpecifications: React.FC = () => {
   return (
     <div className="bg-white p-12 rounded-[3.5rem] border border-gray-100 shadow-2xl">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
@@ -12,11 +11,11 @@ const AllocationOverview: React.FC = () => {
         </div>
         <div className="flex gap-4">
           <div className="text-right">
-             <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Certification Status</p>
-             <div className="flex items-center gap-2 mt-1">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-bold text-green-600">Verified</span>
-             </div>
+            <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Certification Status</p>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-xs font-bold text-green-600">Verified</span>
+            </div>
           </div>
         </div>
       </div>
@@ -91,7 +90,18 @@ const AllocationOverview: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-20 pt-12 border-t border-gray-50 flex flex-wrap gap-8">
+      <div className="mt-12 pt-8 border-t border-gray-50">
+        <div className="mb-12">
+          <h4 className="text-lg font-bold mb-6 text-center">Certification Standards</h4>
+          <img 
+            src="https://zlbemopcgjohrnyyiwvs.supabase.co/storage/v1/object/public/materials/model/screenshot-20260105-033526.png" 
+            alt="Model π Product Compliance Certifications" 
+            className="w-full max-w-2xl mx-auto rounded-lg shadow-md"
+          />
+        </div>
+      </div>
+      
+      <div className="mt-12 pt-8 border-t border-gray-50 flex flex-wrap gap-8">
         <div className="flex-1 min-w-[200px] p-8 bg-gray-50 rounded-[2rem]">
           <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2">Processing Power</p>
           <p className="text-3xl font-bold tracking-tight">10 TFLOPS <span className="text-xs text-blue-500">Neural</span></p>
@@ -105,4 +115,4 @@ const AllocationOverview: React.FC = () => {
   );
 };
 
-export default AllocationOverview;
+export default TechSpecifications;
