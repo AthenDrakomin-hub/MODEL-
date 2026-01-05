@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { database, Order } from '../lib/supabase';
+import { database, Order } from '../src/lib/supabase';
 
 interface OrderHistoryProps {
   userEmail: string;

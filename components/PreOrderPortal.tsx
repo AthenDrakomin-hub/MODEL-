@@ -4,7 +4,7 @@ import { X, Lock, CheckCircle2, CreditCard, ShoppingBag, Truck, Coins, ArrowLeft
 import { CartItem } from '../types';
 import CheckoutForm from './CheckoutForm';
 import ImageWithFallback from './ImageWithFallback';
-import { database } from '../lib/supabase';
+import { database } from '../src/lib/supabase';
 
 interface PreOrderPortalProps {
   cart: CartItem[];
