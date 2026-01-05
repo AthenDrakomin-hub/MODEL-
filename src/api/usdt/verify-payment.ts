@@ -23,7 +23,7 @@ export async function verifyUSDTTransaction(verificationData: USDTVerificationRe
   try {
     // 调用 Supabase 边缘函数进行USDT交易验证
     // 注意：需要将 YOUR-PROJECT-ID 替换为您的实际 Supabase 项目 ID
-    const SUPABASE_PROJECT_URL = `https://YOUR-PROJECT-ID.supabase.co/functions/v1/verify-usdt-payment`;
+    const SUPABASE_PROJECT_URL = `https://rfnrosyfeivcbkimjlwo.supabase.co/functions/v1/verify-usdt-payment`;
     
     const response = await fetch(SUPABASE_PROJECT_URL, {
       method: 'POST',

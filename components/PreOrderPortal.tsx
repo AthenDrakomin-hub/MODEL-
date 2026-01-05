@@ -4,6 +4,7 @@ import { X, Lock, CheckCircle2, CreditCard, ShoppingBag, Truck, Coins, ArrowLeft
 import { CartItem } from '../types';
 import CheckoutForm from './CheckoutForm';
 import ImageWithFallback from './ImageWithFallback';
+import { database } from '../lib/supabase';
 
 interface PreOrderPortalProps {
   cart: CartItem[];
@@ -53,10 +54,35 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
       await handleUSDTVerification();
     } else {
       // 对于信用卡或其他支付方式，处理定金支付
-      const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
-      setOrderId(id);
-      setStep('done');
-      onClearCart();
+      try {
+        // 创建订单记录到数据库
+        if (formData && cart.length > 0) {
+          const orderData = {
+            user_id: 'temp-user-id', // 在实际应用中，这里应该是实际的用户ID
+            status: 'Reservation Confirmed',
+            model: cart[0].model,
+            color: cart[0].color,
+            price: total,
+            deposit_paid: deposit,
+            final_payment_amount: finalPaymentAmount,
+            shipping_address: formData.shippingAddress,
+            city: formData.city,
+            state: formData.state,
+            zip_code: formData.zipCode,
+            country: formData.country,
+            special_instructions: formData.specialInstructions
+          };
+
+          const order = await database.orders.create(orderData);
+          setOrderId(order.order_number);
+        }
+        
+        setStep('done');
+        onClearCart();
+      } catch (error) {
+        console.error('Error creating order:', error);
+        alert('There was an error processing your order. Please try again.');
+      }
     }
   };
 
@@ -72,14 +98,51 @@ const PreOrderPortal: React.FC<PreOrderPortalProps> = ({ cart, onClearCart, onCl
     }
 
     // 预售模式：处理30%定金的PayPal支付
-    // 预售模式：处理30%定金的PayPal支付
     alert('PayPal payment will be processed through secure PayPal gateway. In production, this would redirect to PayPal for authentication and payment processing.\n\nPayPal Client ID configured: ' + (PAYPAL_CLIENT_ID && PAYPAL_CLIENT_ID !== 'CONFIG_REQUIRED')); 
     
-    // 模拟支付成功 - 在实际应用中，这将在PayPal成功回调后处理
-    const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
-    setOrderId(id);
-    setStep('done');
-    onClearCart();
+    try {
+      // 模拟支付成功 - 在实际应用中，这将在PayPal成功回调后处理
+      const transactionId = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
+      
+      // 创建订单记录到数据库
+      if (formData && cart.length > 0) {
+        const orderData = {
+          user_id: 'temp-user-id', // 在实际应用中，这里应该是实际的用户ID
+          status: 'Reservation Confirmed',
+          model: cart[0].model,
+          color: cart[0].color,
+          price: total,
+          deposit_paid: deposit,
+          final_payment_amount: finalPaymentAmount,
+          deposit_transaction_id: transactionId,
+          shipping_address: formData.shippingAddress,
+          city: formData.city,
+          state: formData.state,
+          zip_code: formData.zipCode,
+          country: formData.country,
+          special_instructions: formData.specialInstructions
+        };
+
+        const order = await database.orders.create(orderData);
+        setOrderId(order.order_number);
+        
+        // 创建支付记录
+        await database.payments.create({
+          order_id: order.id,
+          payment_method: 'paypal',
+          transaction_id: transactionId,
+          amount: deposit,
+          status: 'completed',
+          currency: 'USD'
+        });
+      }
+      
+      setStep('done');
+      onClearCart();
+    } catch (error) {
+      console.error('Error processing PayPal payment:', error);
+      alert('There was an error processing your PayPal payment. Please try again.');
+    }
   };
 
   const handleUSDTVerification = async () => {
@@ -108,7 +171,7 @@ After sending, please enter your transaction ID for verification:`);
     try {
       // 调用 Supabase 边缘函数验证USDT交易
       // 注意：需要将 YOUR-PROJECT-ID 替换为您的实际 Supabase 项目 ID
-      const SUPABASE_PROJECT_URL = `https://YOUR-PROJECT-ID.supabase.co/functions/v1/verify-usdt-payment`;
+      const SUPABASE_PROJECT_URL = `https://rfnrosyfeivcbkimjlwo.supabase.co/functions/v1/verify-usdt-payment`;
       
       const response = await fetch(SUPABASE_PROJECT_URL, {
         method: 'POST',
@@ -126,8 +189,40 @@ After sending, please enter your transaction ID for verification:`);
       
       if (result.success && result.verified) {
         alert(`Payment verified successfully! Transaction ID: ${transactionId}`);
-        const id = `TX-${Math.floor(100000 + Math.random() * 900000)}`;
-        setOrderId(id);
+        
+        // 创建订单记录到数据库
+        if (formData && cart.length > 0) {
+          const orderData = {
+            user_id: 'temp-user-id', // 在实际应用中，这里应该是实际的用户ID
+            status: 'Reservation Confirmed',
+            model: cart[0].model,
+            color: cart[0].color,
+            price: total,
+            deposit_paid: deposit,
+            final_payment_amount: finalPaymentAmount,
+            deposit_transaction_id: transactionId,
+            shipping_address: formData.shippingAddress,
+            city: formData.city,
+            state: formData.state,
+            zip_code: formData.zipCode,
+            country: formData.country,
+            special_instructions: formData.specialInstructions
+          };
+
+          const order = await database.orders.create(orderData);
+          setOrderId(order.order_number);
+          
+          // 创建支付记录
+          await database.payments.create({
+            order_id: order.id,
+            payment_method: 'usdt',
+            transaction_id: transactionId,
+            amount: deposit,
+            status: 'completed',
+            currency: 'USDT'
+          });
+        }
+        
         setStep('done');
         onClearCart();
       } else {

@@ -54,6 +54,20 @@ This is a Tesla Model π Official Pre-order Platform built with React 19 and Typ
 - `verify-usdt-payment.ts` - Verifies USDT transactions on TRON blockchain (in supabase/functions/)
 - These functions handle secure payment processing on the backend
 
+## Supabase Database Configuration
+
+Project: model
+Database URL: postgresql://postgres.rfnrosyfeivcbkimjlwo:[YOUR-PASSWORD]@aws-1-eu-central-1.pooler.supabase.com:6543/postgres
+Project URL: https://rfnrosyfeivcbkimjlwo.supabase.co
+API Key: sb_publishable_IXgnSjd313VGgwsANyLGYg_sHdoTZtk
+
+## Supabase Deployment Commands
+
+- `supabase functions deploy paypal-create-order` - Deploy PayPal function
+- `supabase functions deploy verify-usdt-payment` - Deploy USDT verification function
+- `supabase secrets set PAYPAL_CLIENT_ID=your_client_id` - Set PayPal client ID
+- `supabase secrets set PAYPAL_CLIENT_SECRET=your_client_secret` - Set PayPal client secret
+
 ## API Integration Pattern
 
 - Frontend API calls are made to Supabase Edge Functions to avoid exposing sensitive credentials
